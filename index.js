@@ -54,12 +54,12 @@ if (environment === 'production') {
   });
 }
 
-mongoose.connection.once('open', () => {
-  console.log('Connected to MongoDB');
-  app.listen(port, () => {
-    console.log('Backend server is running at: ', port);
-  });
-});
+// mongoose.connection.once('open', () => {
+//   console.log('Connected to MongoDB');
+//   app.listen(port, () => {
+//     console.log('Backend server is running at: ', port);
+//   });
+// });
 
 // It should be at the end
 app.use((req, res) => {
