@@ -1,17 +1,11 @@
-import Koa from "koa";import Router from "koa-router";
-import bodyParser from "koa-bodyparser";
 import _ from "lodash";
+
 import Users from "../models/Users";
-// import ApiOptimizer from '../api';
+import ApiOptimizer from '../api';
+
 // import checkRole from '../middleware/checkRole';
 import errorHandling from "../middleware/errorHandler";
-// import { ROLES } from "../enums";
-
-const app = new Koa();
-const router = new Router();
-const port = process.env.PORT || 3000;
-
-app.use(bodyParser());
+import { ROLES } from "../enums";
 
 const user = new ApiOptimizer(Users);
 const modelName = "User";
@@ -52,10 +46,4 @@ router.put("/users/:id", checkRole([ROLES.ADMIN]), async (ctx) => {
    }
 });
 
-// Additional Koa app setup if needed
-
-app.use(router.routes()).use(router.allowedMethods());
-
-app.listen(port, () => {
-   console.log(`Server is running on http://localhost:${port}`);
-});
+export default router;
