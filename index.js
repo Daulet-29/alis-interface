@@ -18,7 +18,7 @@ import { getCurrentTime } from './utils/index.js';
 */
 mongoose
   .connect(
-    'mongodb+srv://user:user@smavyplatform.eyoabnp.mongodb.net/?retryWrites=true&w=majority',
+    'mongodb+srv://alis_user:user@cluster0.tn4mg5k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
   )
   .then(() => console.log('Database connected!'))
   .catch(err => console.log(err));
