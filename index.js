@@ -12,6 +12,8 @@ import {
 } from './config/index.js';
 import router from './router/index.js';
 import { getCurrentTime } from './utils/index.js';
+import authRouter from './router/auth.js';
+
 
 /* Connect to DB
     Connection logic goes here
@@ -32,6 +34,7 @@ app
   .use(helmet());
 
 app.use(router.routes());
+app.use(authRouter.routes());
 
 
 const currentTime = getCurrentTime();
