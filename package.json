@@ -11,6 +11,26 @@
     "koa-router": "^12.0.1",
     "lodash": "^4.17.21",
     "mongodb": "^6.3.0",
-    "mongoose": "^8.2.0"
-  }
+    "mongoose": "^8.2.0",
+    "nodemon": "^3.1.0",
+    "validator": "^13.11.0"
+  },
+  "name": "alis-interface",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daulet-29/alis-interface.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Daulet-29/alis-interface/issues"
+  },
+  "homepage": "https://github.com/Daulet-29/alis-interface#readme"
 }

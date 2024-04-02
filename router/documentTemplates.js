@@ -1,9 +1,9 @@
 import _ from "lodash";
 
-import DocumentTemplates from "../models/DocumentTemplates";
-import ApiOptimizer from "../api";
+import DocumentTemplates from "../models/DocumentTemplates.js";
+import ApiOptimizer from "../api/index.js";
 
-import errorHandling from "../middleware/errorHandler";
+import errorHandling from "../middlewares/errorHandler.js";
 
 const documentTemplates = new ApiOptimizer(DocumentTemplates);
 const modelName = "DocumentTemplates";
