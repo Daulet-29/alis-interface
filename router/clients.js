@@ -1,9 +1,9 @@
 import _ from "lodash";
 
-import Clients from "../models/Clients";
-import ApiOptimizer from "../api";
+import Clients from "../models/Clients.js";
+import ApiOptimizer from "../api/index.js";
 
-import errorHandling from "../middleware/errorHandler";
+import errorHandling from "../middlewares/errorHandler.js";
 
 const client = new ApiOptimizer(Clients);
 const modelName = "Clients";

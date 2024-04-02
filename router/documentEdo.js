@@ -1,9 +1,9 @@
 import _ from "lodash";
 
-import DocumentEdo from "../models/DocumentEdo";
-import ApiOptimizer from "../api";
+import DocumentEdo from "../models/DocumentEdo.js";
+import ApiOptimizer from "../api/index.js";
 
-import errorHandling from "../middleware/errorHandler";
+import errorHandling from "../middlewares/errorHandler.js";
 
 const documentEdo = new ApiOptimizer(DocumentEdo);
 const modelName = "DocumentEdo";

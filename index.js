@@ -1,27 +1,30 @@
-import bodyParser from 'koa-bodyparser';
-import Koa from 'koa';
-import http from 'http';
-import https from 'https';
-import cors from '@koa/cors';
-import helmet from 'koa-helmet';
-import mongoose from 'mongoose';
+import bodyParser from "koa-bodyparser";
+import Koa from "koa";
+import http from "http";
+import https from "https";
+import cors from "@koa/cors";
+import helmet from "koa-helmet";
+import mongoose from "mongoose";
+import usersRoute from "./router/users.js";
+import organizationRoute from "./router/organization.js";
+import documentTemplateRoute from "./router/documentTemplates.js";
+import documentRoute from "./router/documents.js";
+import documentEdoRoute from "./router/documentEdo.js";
+import clientsRoute from "./router/clients.js";
 
-import {
-  port,
-  environment,
-} from './config/index.js';
-import router from './router/index.js';
-import { getCurrentTime } from './utils/index.js';
+import { port, environment } from "./config/index.js";
+import router from "./router/index.js";
+import { getCurrentTime } from "./utils/index.js";
 
 /* Connect to DB
     Connection logic goes here
 */
 mongoose
   .connect(
-    'mongodb+srv://alis_user:user@cluster0.tn4mg5k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
+    "mongodb+srv://alis_user:user@cluster0.tn4mg5k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
   )
-  .then(() => console.log('Database connected!'))
-  .catch(err => console.log(err));
+  .then(() => console.log("Database connected!"))
+  .catch((err) => console.log(err));
 
 // Create Koa Application
 const app = new Koa();
@@ -33,13 +36,12 @@ app
 
 app.use(router.routes());
 
-
 const currentTime = getCurrentTime();
 // Start the application
-if (environment === 'production') {
+if (environment === "production") {
   const options = {
-    cert: '', // sslCertificate
-    key: '', // sslKey 
+    cert: "", // sslCertificate
+    key: "", // sslKey
   };
   https.createServer(options, app.callback()).listen(port, () => {
     console.log(
@@ -47,7 +49,7 @@ if (environment === 'production') {
     );
   });
 } else {
-   http.createServer(app.callback()).listen(port, () => {
+  http.createServer(app.callback()).listen(port, () => {
     console.log(
       `✅  ${currentTime} - The server is running at http://localhost:${port}/`
     );
@@ -61,9 +63,16 @@ if (environment === 'production') {
 //   });
 // });
 
+app.use("/users", usersRoute);
+app.use("/organization", organizationRoute);
+app.use("/documentTemplates", documentTemplateRoute);
+app.use("/documents", documentRoute);
+app.use("/documentEdo", documentEdoRoute);
+app.use("/clients", clientsRoute);
+
 // It should be at the end
 app.use((req, res) => {
-  return res.status(404).json({ message: 'Endpoint not found' });
+  return res.status(404).json({ message: "Endpoint not found" });
 });
 
 export default app;
