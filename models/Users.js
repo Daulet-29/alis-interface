@@ -45,6 +45,10 @@ const UsersSchema = new Schema(
       enum: ["admin", "student", "teacher"],
       required: true,
     },
+    organization: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Organization",
+    },
   },
   { timestamps: true }
 );

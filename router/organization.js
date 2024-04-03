@@ -1,11 +1,15 @@
 import _ from "lodash";
 
-import Organizations from "../models/Organizations";
-import ApiOptimizer from "../api";
+import Organization from "../models/Organizations.js";
+// const Organization = require("../models/Organizations.js");
 
-import errorHandling from "../middleware/errorHandler";
+import ApiOptimizer from "../api/index.js";
+import Router from "@koa/router";
+const router = new Router();
 
-const organization = new ApiOptimizer(Organizations);
+import errorHandling from "../middlewares/errorHandler.js";
+
+const organization = new ApiOptimizer(Organization);
 const modelName = "Organization";
 
 router.get("/", async (ctx) => {
@@ -32,7 +36,7 @@ router.get("/:id", async (ctx) => {
   }
 });
 
-router.put("/:id", checkRole([ROLES.ADMIN]), async (ctx) => {
+router.put("/:id", async (ctx) => {
   try {
     const entityId = _.get(ctx, "params.id");
     const {

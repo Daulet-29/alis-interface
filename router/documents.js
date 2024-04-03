@@ -1,9 +1,11 @@
 import _ from "lodash";
 
-import Document from "../models/Documents";
-import ApiOptimizer from "../api";
+import Document from "../models/Documents.js";
+import ApiOptimizer from "../api/index.js";
 
-import errorHandling from "../middleware/errorHandler";
+import errorHandling from "../middlewares/errorHandler.js";
+import Router from "@koa/router";
+const router = new Router();
 
 const document = new ApiOptimizer(Document);
 const modelName = "Documents";
@@ -32,7 +34,7 @@ router.get("/:id", async (ctx) => {
   }
 });
 
-router.put("/:id", checkRole([ROLES.ADMIN]), async (ctx) => {
+router.put("/:id", async (ctx) => {
   try {
     const entityId = _.get(ctx, "params.id");
     const { category, subtype, mappingData } = ctx.request.body;

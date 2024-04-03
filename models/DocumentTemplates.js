@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const documentTemplateSchema = new mongoose.Schema(
   {
@@ -14,4 +14,4 @@ const DocumentTemplate = mongoose.model(
   "DocumentTemplate",
   documentTemplateSchema
 );
-module.exports = DocumentTemplate;
+export default DocumentTemplate;
