@@ -4,6 +4,8 @@ import DocumentEdo from "../models/DocumentEdo.js";
 import ApiOptimizer from "../api/index.js";
 
 import errorHandling from "../middlewares/errorHandler.js";
+import Router from "@koa/router";
+const router = new Router();
 
 const documentEdo = new ApiOptimizer(DocumentEdo);
 const modelName = "DocumentEdo";

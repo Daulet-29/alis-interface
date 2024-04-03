@@ -1,4 +1,6 @@
 import _ from "lodash";
+import Router from "@koa/router";
+const router = new Router();
 
 import DocumentTemplates from "../models/DocumentTemplates.js";
 import ApiOptimizer from "../api/index.js";

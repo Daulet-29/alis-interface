@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const documentEdoSchema = new mongoose.Schema(
   {
@@ -10,4 +10,5 @@ const documentEdoSchema = new mongoose.Schema(
 );
 
 const DocumentEdo = mongoose.model("DocumentEdo", documentEdoSchema);
-module.exports = DocumentEdo;
+
+export default DocumentEdo;

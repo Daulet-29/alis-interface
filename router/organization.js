@@ -4,6 +4,8 @@ import Organization from "../models/Organizations.js";
 // const Organization = require("../models/Organizations.js");
 
 import ApiOptimizer from "../api/index.js";
+import Router from "@koa/router";
+const router = new Router();
 
 import errorHandling from "../middlewares/errorHandler.js";
 
@@ -34,7 +36,7 @@ router.get("/:id", async (ctx) => {
   }
 });
 
-router.put("/:id", checkRole([ROLES.ADMIN]), async (ctx) => {
+router.put("/:id", async (ctx) => {
   try {
     const entityId = _.get(ctx, "params.id");
     const {

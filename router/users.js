@@ -1,12 +1,8 @@
-import _ from "lodash";
-
-import Users from "../models/Users.js";
-
-import ApiOptimizer from "../api/index.js";
-
-// import checkRole from '../middleware/checkRole';
+import Router from "@koa/router";
+const router = new Router();
+import Users from "../models/Users.js"; // Ensure this path is correct
+import ApiOptimizer from "../api/index.js"; // Ensure this path is correct
 import errorHandling from "../middlewares/errorHandler.js";
-// import { ROLES } from "../enums";
 
 const user = new ApiOptimizer(Users);
 const modelName = "User";
@@ -19,20 +15,22 @@ router.get("/users", async (ctx) => {
   }
 });
 
-app.post("/", async (req, res) => {
+router.post("/users", async (ctx) => {
   try {
-    const { organization } = req.body;
+    const { organization } = ctx.request.body;
     let query = {};
 
     if (organization) {
       query.organization = organization;
     }
 
-    const users = await UsersModel.find(query).populate("organization");
-    res.status(200).json(users);
+    const users = await Users.find(query).populate("organization");
+    ctx.status = 200;
+    ctx.body = users;
   } catch (error) {
     console.error("Failed to fetch users:", error);
-    res.status(500).json({ message: "Internal server error" });
+    ctx.status = 500;
+    ctx.body = { message: "Internal server error" };
   }
 });
 
@@ -54,7 +52,7 @@ router.get("/users/:id", async (ctx) => {
 
 router.put("/users/:id", async (ctx) => {
   try {
-    const entityId = _.get(ctx, "params.id");
+    const entityId = ctx.params.id;
     const { role } = ctx.request.body;
     const fieldsToUpdate = { role };
 
