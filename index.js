@@ -12,6 +12,8 @@ import router from "./router/index.js";
 import authRouter from "./router/auth.js"; // Assuming you have auth routes
 
 import { getCurrentTime } from "./utils/index.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 /* Connect to DB
     Connection logic goes here
@@ -21,6 +23,7 @@ mongoose
       "mongodb+srv://alis_user:user@cluster0.tn4mg5k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
    )
    .then(() => console.log("Database connected!"))
+   .then(() => console.log(mongoose.connection.readyState))
    .catch((err) => console.log(err));
 
 // Create Koa Application
