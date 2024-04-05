@@ -53,7 +53,6 @@ const UsersSchema = new Schema(
   { timestamps: true }
 );
 
-// Method for checking refresh token
 UsersSchema.methods.isValidRefreshToken = function (providedRefreshToken) {
   return this.refreshToken === providedRefreshToken;
 };

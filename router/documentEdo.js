@@ -10,7 +10,17 @@ const router = new Router();
 const documentEdo = new ApiOptimizer(DocumentEdo);
 const modelName = "DocumentEdo";
 
-router.get("/", async (ctx) => {
+router.post("/documentEdo/add", async (req, res) => {
+  try {
+    const { category } = req.body;
+    const entity = { category };
+    await documentEdo.add({ entity, res });
+  } catch (err) {
+    errorHandler(err, req, res);
+  }
+});
+
+router.get("/documentEdo/", async (ctx) => {
   try {
     await documentEdo.getAll(ctx);
   } catch (err) {
@@ -18,7 +28,7 @@ router.get("/", async (ctx) => {
   }
 });
 
-router.delete("/:id", async (ctx) => {
+router.delete("/documentEdo/:id", async (ctx) => {
   try {
     await documentEdo.deleteById(ctx, modelName);
   } catch (err) {
@@ -26,7 +36,7 @@ router.delete("/:id", async (ctx) => {
   }
 });
 
-router.get("/:id", async (ctx) => {
+router.get("/documentEdo/:id", async (ctx) => {
   try {
     await documentEdo.getById(ctx, modelName);
   } catch (err) {
@@ -34,7 +44,7 @@ router.get("/:id", async (ctx) => {
   }
 });
 
-router.put("/:id", async (ctx) => {
+router.put("/documentEdo/:id", async (ctx) => {
   try {
     const entityId = _.get(ctx, "params.id");
     const { category, subtype, documents } = ctx.request.body;

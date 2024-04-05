@@ -1,7 +1,6 @@
 import _ from "lodash";
 
 import Organization from "../models/Organizations.js";
-// const Organization = require("../models/Organizations.js");
 
 import ApiOptimizer from "../api/index.js";
 import Router from "@koa/router";
@@ -12,7 +11,17 @@ import errorHandling from "../middlewares/errorHandler.js";
 const organization = new ApiOptimizer(Organization);
 const modelName = "Organization";
 
-router.get("/", async (ctx) => {
+router.post("/organization/add", async (req, res) => {
+  try {
+    const { bin_iin, name } = req.body;
+    const entity = { bin_iin, name };
+    await organization.add({ entity, res });
+  } catch (err) {
+    errorHandler(err, req, res);
+  }
+});
+
+router.get("/organization/", async (ctx) => {
   try {
     await organization.getAll(ctx);
   } catch (err) {
@@ -20,7 +29,7 @@ router.get("/", async (ctx) => {
   }
 });
 
-router.delete("/:id", async (ctx) => {
+router.delete("/organization/:id", async (ctx) => {
   try {
     await organization.deleteById(ctx, modelName);
   } catch (err) {
@@ -28,7 +37,7 @@ router.delete("/:id", async (ctx) => {
   }
 });
 
-router.get("/:id", async (ctx) => {
+router.get("/organization/:id", async (ctx) => {
   try {
     await organization.getById(ctx, modelName);
   } catch (err) {
@@ -36,7 +45,7 @@ router.get("/:id", async (ctx) => {
   }
 });
 
-router.put("/:id", async (ctx) => {
+router.put("/organization/:id", async (ctx) => {
   try {
     const entityId = _.get(ctx, "params.id");
     const {

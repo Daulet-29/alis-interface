@@ -10,7 +10,17 @@ const router = new Router();
 const client = new ApiOptimizer(Clients);
 const modelName = "Clients";
 
-router.get("/", async (ctx) => {
+router.post("/clients/add", async (req, res) => {
+  try {
+    const { firstName } = req.body;
+    const entity = { firstName };
+    await client.add({ entity, res });
+  } catch (err) {
+    errorHandler(err, req, res);
+  }
+});
+
+router.get("/clients/", async (ctx) => {
   try {
     await client.getAll(ctx);
   } catch (err) {
@@ -18,7 +28,7 @@ router.get("/", async (ctx) => {
   }
 });
 
-router.delete("/:id", async (ctx) => {
+router.delete("/clients/:id", async (ctx) => {
   try {
     await client.deleteById(ctx, modelName);
   } catch (err) {
@@ -26,7 +36,7 @@ router.delete("/:id", async (ctx) => {
   }
 });
 
-router.get("/:id", async (ctx) => {
+router.get("/clients/:id", async (ctx) => {
   try {
     await client.getById(ctx, modelName);
   } catch (err) {
@@ -34,7 +44,7 @@ router.get("/:id", async (ctx) => {
   }
 });
 
-router.put("/:id", async (ctx) => {
+router.put("/clients/:id", async (ctx) => {
   try {
     const entityId = _.get(ctx, "params.id");
     const {

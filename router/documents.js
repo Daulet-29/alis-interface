@@ -10,7 +10,17 @@ const router = new Router();
 const document = new ApiOptimizer(Document);
 const modelName = "Documents";
 
-router.get("/", async (ctx) => {
+router.post("/documents/add", async (req, res) => {
+  try {
+    const { category } = req.body;
+    const entity = { category };
+    await document.add({ entity, res });
+  } catch (err) {
+    errorHandler(err, req, res);
+  }
+});
+
+router.get("/documents/", async (ctx) => {
   try {
     await document.getAll(ctx);
   } catch (err) {
@@ -18,7 +28,7 @@ router.get("/", async (ctx) => {
   }
 });
 
-router.delete("/:id", async (ctx) => {
+router.delete("/documents/:id", async (ctx) => {
   try {
     await document.deleteById(ctx, modelName);
   } catch (err) {
@@ -26,7 +36,7 @@ router.delete("/:id", async (ctx) => {
   }
 });
 
-router.get("/:id", async (ctx) => {
+router.get("/documents/:id", async (ctx) => {
   try {
     await document.getById(ctx, modelName);
   } catch (err) {
@@ -34,7 +44,7 @@ router.get("/:id", async (ctx) => {
   }
 });
 
-router.put("/:id", async (ctx) => {
+router.put("/documents/:id", async (ctx) => {
   try {
     const entityId = _.get(ctx, "params.id");
     const { category, subtype, mappingData } = ctx.request.body;

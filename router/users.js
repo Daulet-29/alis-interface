@@ -1,11 +1,21 @@
 import Router from "@koa/router";
 const router = new Router();
-import Users from "../models/Users.js"; // Ensure this path is correct
-import ApiOptimizer from "../api/index.js"; // Ensure this path is correct
+import Users from "../models/Users.js";
+import ApiOptimizer from "../api/index.js";
 import errorHandling from "../middlewares/errorHandler.js";
 
 const user = new ApiOptimizer(Users);
 const modelName = "User";
+
+router.post("/add", async (req, res) => {
+  try {
+    const { email, password, firstName, lastName, organization } = req.body;
+    const entity = { email, password, firstName, lastName, organization };
+    await user.add({ entity, res });
+  } catch (err) {
+    errorHandler(err, req, res);
+  }
+});
 
 router.get("/users", async (ctx) => {
   try {
