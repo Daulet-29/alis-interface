@@ -1,12 +1,11 @@
-import Router from 'koa-router';
+import Router from "koa-router";
+import AuthController from "../controllers/authentication.js";
 
-import AuthController from '../controllers/auth';
-
-const router = new Router();
+const authRouter = new Router();
 
 // Example authentication routes
-router.post('/login', AuthController.login);
-router.post('/register', AuthController.register);
-router.post('/logout', AuthController.logout);
+authRouter.post("/login", AuthController.login);
+authRouter.post("/register", AuthController.register);
+authRouter.post("/logout", AuthController.logout);
 
 export default authRouter;

@@ -2,7 +2,7 @@ import Router from 'koa-router';
 
 import { basePreffix } from '../config/index.js';
 import errorHandler from '../middlewares/errorHandler.js';
-import authRouter from '../controllers/auth.js';
+import authRouter from '../controllers/authentication.js';
 // import caseRouter from './case.js';
 // import todoRouter from './todo.js';
 
